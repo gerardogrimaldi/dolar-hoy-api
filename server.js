@@ -6,20 +6,19 @@ var mail = require("./nodemail");
 var valoresSchema = require("./Model/mongoSchema").valoresDolarHoySchema;
 var Valores = mongoose.model('ValoresDolarHoy', valoresSchema);
 
-mongoose.connect(uristring, function (err, res) {
-    if (err) { 
-         onError('ERROR connecting to: ' + uristring + '. ' + err); 
-    } else { 
-        console.log ('Succeeded connected to: ' + uristring); 
-    }
-});
-
 var app = express();
 app.use(express.logger());
 
 app.get('/Dolar/:pass', function(req, res) {
     if (req.params.pass != 'Hola123!') return res.send('Error: Wrong password...');
     try {
+        mongoose.connect(uristring, function (err, res) {
+            if (err) { 
+                 onError('ERROR connecting to: ' + uristring + '. ' + err); 
+            } else { 
+                console.log ('Succeeded connected to: ' + uristring); 
+            }
+        });
         Valores.findOne()
         .select('dolarCompra dolarVenta dolarBlueCompra dolarBlueVenta dolarTarjeta euroCompra euroVenta date')
         .sort('-date')
