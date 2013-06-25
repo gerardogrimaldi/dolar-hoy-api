@@ -12,13 +12,16 @@ app.use(express.logger());
 app.get('/Dolar/:pass', function(req, res) {
     if (req.params.pass != 'Hola123!') return res.send('Error: Wrong password...');
     try {
-        mongoose.connect(uristring, function (err, res) {
-            if (err) { 
-                 onError('ERROR connecting to: ' + uristring + '. ' + err); 
-            } else { 
-                console.log ('Succeeded connected to: ' + uristring); 
-            }
-        });
+        if(!mongoose.connection.readyState){
+            mongoose.connect(uristring, function (err, res) {
+                if (err) { 
+                     onError('ERROR connecting to: ' + uristring + '. ' + err); 
+                } else { 
+                    console.log ('Succeeded connected to: ' + uristring); 
+                }
+            });    
+        }
+        
         Valores.findOne()
         .select('dolarCompra dolarVenta dolarBlueCompra dolarBlueVenta dolarTarjeta euroCompra euroVenta date')
         .sort('-date')
@@ -27,9 +30,10 @@ app.get('/Dolar/:pass', function(req, res) {
             if (err) return onError(err);
             return res.send(JSON.stringify(doc));
         });
+        
     }
     catch(err) { onError(err); }
-    //finally { mongoose.connection.close();}
+    //finally { mongoose.disconnect(); }
 });
 
 app.listen(process.env.PORT);
