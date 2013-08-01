@@ -23,7 +23,7 @@ app.get('/Dolar/:pass', function(req, res) {
         }
         
         Valores.findOne()
-        .select('dolarCompra dolarVenta dolarBlueCompra dolarBlueVenta dolarTarjeta euroCompra euroVenta date')
+        .select('dolarCompra dolarVenta dolarBlueCompra dolarBlueVenta dolarTarjeta realCompra realVenta euroCompra euroVenta date')
         .sort('-date')
         .exec(
         function (err, doc) {
