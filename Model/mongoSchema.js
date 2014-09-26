@@ -6,8 +6,6 @@ var valoresDolarHoySchema = new mongoose.Schema({
     dolarBlueCompra : String,
     dolarBlueVenta : String,
     dolarTarjeta : String,
-    realCompra : String,
-    realVenta : String,
     euroCompra : String,
     euroVenta : String,
     date : Date
