@@ -1,6 +1,6 @@
 var uristring = process.env.MONGOLAB_URI || process.env.MONGOHQ_URL || // conexion a mongolabs 'mongodb://dolarhoy:Hola123!@ds051447.mongolab.com:51447/dolarhoydb';
 'mongodb://dolarhoy:Traserito#321!@widmore.mongohq.com:10010/dolarhoydb';
-var mongoose = require ("mongoose"); 
+var mongoose = require ("mongoose");
 var express = require('express');
 var valoresDolarHoySchema = new mongoose.Schema({
     dolarCompra : String,
@@ -21,7 +21,7 @@ app.get('/Dolar/:pass', function(req, res) {
     if(req.params.pass == 'Hola123!'){
         try{
             mongoose.connect(uristring, function (err, res) {
-                if (err) { console.log ('ERROR connecting to: ' + uristring + '. ' + err); } 
+                if (err) { console.log ('ERROR connecting to: ' + uristring + '. ' + err); }
                 else { console.log ('Succeeded connected to: ' + uristring); }
             });
             return Valores.findOne({}, {}, { sort: { 'date' : -1 } }, function(err, doc) {
