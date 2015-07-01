@@ -1,13 +1,13 @@
 {
-    "name": "DolarHoyMailServer",
-    "version": "0.0.1",
-    "dependencies": {
-        "express": "3.1.x",
-        "nodemailer" : "0.4.4",
-        "mongoose" : "3.6.11"
-    },
-    "engines": {
-        "node": "0.10.x",
-        "npm": "1.2.x"
-    }
+  "name": "DolarHoyMailServer",
+  "version": "0.0.1",
+  "dependencies": {
+    "express": "3.1.x",
+    "mongoose": "^3.6.11",
+    "nodemailer": "0.4.4"
+  },
+  "engines": {
+    "node": "0.10.x",
+    "npm": "1.2.x"
+  }
 }
