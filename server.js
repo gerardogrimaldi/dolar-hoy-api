@@ -1,6 +1,4 @@
-var uristring = process.env.MONGOLAB_URI || process.env.MONGOHQ_URL
-|| 'mongodb://dolarhoy:Traserito#321!@ds053380.mongolab.com:53380/dolathoydb2'
-//'mongodb://dolarhoy:Traserito#321!@widmore.mongohq.com:10010/dolarhoydb';
+var uristring = process.env.MONGOLAB_URI || process.env.MONGOHQ_URL;
 var mongoose = require ("mongoose");
 var express = require('express');
 var mail = require("./nodemail");
