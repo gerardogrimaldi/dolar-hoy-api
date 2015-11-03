@@ -1,4 +1,4 @@
-var uristring = process.env.MONGOLAB_URI || process.env.MONGOHQ_URL;
+var uriString = 'mongodb://heroku_hp49qmbd:2uac8h9g06op5db8a1d3i26kr0@ds049084.mongolab.com:49084/heroku_hp49qmbd';
 var mongoose = require ("mongoose");
 var express = require('express');
 var mail = require("./nodemail");
@@ -8,49 +8,44 @@ var Valores = mongoose.model('ValoresDolarHoy', valoresSchema);
 var app = express();
 app.use(express.logger());
 
-// CORS header securiy
+// CORS
 app.all('/*', function (req, res, next) {
-  // Website you wish to allow to connect
-  //res.setHeader('Access-Control-Allow-Origin', 'http://localhost:8888');
   res.header("Access-Control-Allow-Origin", "*");
-  // Request methods you wish to allow
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
-  // Request headers you wish to allow
   res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
-  // Set to true if you need the website to include cookies in the requests sent
-  // to the API (e.g. in case you use sessions)
   res.setHeader('Access-Control-Allow-Credentials', true);
-  // Pass to next layer of middleware
   next();
 });
 
 app.get('/dolar/:pass', function(req, res) {
-  if (req.params.pass != 'Hola123!') return res.send('Error: Wrong password...');
-  try {
-    if(!mongoose.connection.readyState){
-      mongoose.connect(uristring, function (err, res) {
-      if (err) {
-        onError('ERROR connecting to: ' + uristring + '. ' + err);
-      } else {
-        console.log ('Succeeded connected to: ' + uristring);
-      }
-    });
+  if (req.params.pass !== 'Hola123!') {
+    return res.send('Error: Wrong password...');
   }
 
-  Valores.findOne()
-    .select('dolarCompra dolarVenta dolarBlueCompra dolarBlueVenta dolarTarjeta realCompra realVenta euroCompra euroVenta date')
-    .sort('-date')
-    .exec(
-    function (err, doc) {
-        if (err) { return onError(err); }
-        return res.send(JSON.stringify(doc));
-    });
-
-}
-catch(err) {
-  onError(err);
-}
-    //finally { mongoose.disconnect(); }
+  try {
+    if(!mongoose.connection.readyState) {
+      mongoose.connect(uriString, function (err, response) {
+        if (err) {
+          onError('ERROR connecting to: ' + uriString + '. ' + err);
+        } else {
+          console.log ('Succeeded connected to: ' + uriString);
+          Valores.findOne()
+            .select('dolarCompra dolarVenta dolarBlueCompra dolarBlueVenta dolarTarjeta realCompra realVenta euroCompra euroVenta date')
+            .sort('-date')
+            .exec(
+            function (err, doc) {
+              console.log(doc);
+              if (err) {
+                return onError(err);
+              }
+              return res.send(JSON.stringify(doc));
+            });
+        }
+      });
+    }
+  } catch (err) {
+    onError(err);
+  }
 });
 
 app.listen(process.env.PORT || 3000);
