@@ -54,7 +54,7 @@ app.get('/dolarGraph/:pass', function(req, res) {
         onError(body);
         res.status(404).send('Not found');
       } else {
-        return res.send(JSON.stringify(body));
+        return res.send(eval(body));
       }
     });
 });
