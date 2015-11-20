@@ -1,10 +1,11 @@
 var uriString = process.env.MONGOLAB_URI;
 var mongoose = require('mongoose');
 var express = require('express');
+var request = require("request");
 var mail = require('./nodemail');
 var valoresSchema = require('./Model/mongoSchema').valoresDolarHoySchema;
 var Valores = mongoose.model('ValoresDolarHoy', valoresSchema);
-
+console.log(uriString);
 mongoose.connect(uriString, function (err, res) {
   if (err) {
     console.log ('ERROR connecting to: ' + uriString + '. ' + err);
@@ -15,6 +16,7 @@ mongoose.connect(uriString, function (err, res) {
 
 var app = express();
 app.use(express.logger());
+
 // CORS
 app.all('/*', function (req, res, next) {
   res.header('Access-Control-Allow-Origin', '*');
@@ -41,11 +43,28 @@ app.get('/dolar/:pass', function(req, res) {
       });
 });
 
+app.get('/dolarGraph/:pass', function(req, res) {
+  if (req.params.pass !== 'Hola123!') {
+    return res.send('Error: Wrong password...');
+  }
+  request({
+      url: 'http://www.ambito.com/economia/mercados/monedas/x_monedas_get_grafico.asp?ric=ARSSCBCRA&tipo=ww&from=modulo_mercados', json: true
+    }, function (error, response, body) {
+      if (error && response.statusCode !== 200) {
+        onError(body);
+        res.status(404).send('Not found');
+      } else {
+        return res.send(JSON.stringify(body));
+      }
+    });
+});
+
+
 app.listen(process.env.PORT || 3000);
 
 function onError(err) {
-  mail.mailOptions.subject = 'DolarHoyServer Info: Error';
-  mail.mailOptions.html = 'ERROR connecting to: ' + uristring + '. ' + err;
+  mail.mailOptions.subject = 'DolarHoyApi Info: Error';
+  mail.mailOptions.html = 'ERROR connecting to: ' + uriString + '. ' + err;
   mail.sendMail();
   console.log(err);
 }
