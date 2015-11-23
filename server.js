@@ -43,7 +43,7 @@ app.get('/dolar/:pass', function(req, res) {
       });
 });
 
-app.get('/dolarGraph/:pass', function(req, res) {
+app.get('/dolar-graph/:pass', function(req, res) {
   if (req.params.pass !== 'Hola123!') {
     return res.send('Error: Wrong password...');
   }
@@ -59,7 +59,53 @@ app.get('/dolarGraph/:pass', function(req, res) {
     });
 });
 
+app.get('/dolar-blue-graph/:pass', function(req, res) {
+  if (req.params.pass !== 'Hola123!') {
+    return res.send('Error: Wrong password...');
+  }
+  request({
+    url: 'http://www.ambito.com/economia/mercados/monedas/x_monedas_get_grafico.asp?ric=ARSB=&tipo=ww&from=modulo_mercados', json: true
+  }, function (error, response, body) {
+    if (error && response.statusCode !== 200) {
+      onError(body);
+      res.status(404).send('Not found');
+    } else {
+      return res.send(eval(body));
+    }
+  });
+});
 
+app.get('/dolar-tarjeta-graph/:pass', function(req, res) {
+  if (req.params.pass !== 'Hola123!') {
+    return res.send('Error: Wrong password...');
+  }
+  request({
+    url: 'http://www.ambito.com/economia/mercados/monedas/x_monedas_get_grafico.asp?ric=ARSSCBCRA=DT&tipo=ww&from=modulo_mercados', json: true
+  }, function (error, response, body) {
+    if (error && response.statusCode !== 200) {
+      onError(body);
+      res.status(404).send('Not found');
+    } else {
+      return res.send(eval(body));
+    }
+  });
+});
+
+app.get('/dolar-ahorro-graph/:pass', function(req, res) {
+  if (req.params.pass !== 'Hola123!') {
+    return res.send('Error: Wrong password...');
+  }
+  request({
+    url: 'http://www.ambito.com/economia/mercados/monedas/x_monedas_get_grafico.asp?ric=ARSSCBCRA=TE&tipo=ww&from=modulo_mercados', json: true
+  }, function (error, response, body) {
+    if (error && response.statusCode !== 200) {
+      onError(body);
+      res.status(404).send('Not found');
+    } else {
+      return res.send(eval(body));
+    }
+  });
+});
 app.listen(process.env.PORT || 3000);
 
 function onError(err) {
