@@ -1,7 +1,7 @@
 var uriString = process.env.MONGOLAB_URI;
 var mongoose = require('mongoose');
 var express = require('express');
-var request = require("request");
+var request = require('request');
 var mail = require('./nodemail');
 var valoresSchema = require('./Model/mongoSchema').valoresDolarHoySchema;
 var Valores = mongoose.model('ValoresDolarHoy', valoresSchema);

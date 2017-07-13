@@ -1,14 +1,37 @@
 {
-  "name": "DolarHoyServer",
-  "version": "0.0.1",
+  "name": "dolarhoyserver",
+  "version": "1.0.0",
   "dependencies": {
-    "express": "3.1.x",
+    "express": "4.15.x",
     "mongoose": ">=4.1.11",
-    "nodemailer": "0.4.4",
+    "nodemailer": "4.0.1",
     "request": "^2.67.0"
   },
   "engines": {
-    "node": "0.10.x",
-    "npm": "1.2.x"
-  }
+    "node": "8.1.4",
+    "npm": "4.2.x"
+  },
+  "scripts": {
+    "start": "node server.js"
+  },
+  "description": "Dolar hoy api works as a service for deliver graphical data and majors inprovements over the old server.",
+  "main": "server.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gerardogrimaldi/DolarHoyApi.git"
+  },
+  "keywords": [
+    "nodejs",
+    "scraper",
+    "server",
+    "dolar",
+    "hoy",
+    "dolarhoy"
+  ],
+  "author": "Gerardo Grimaldi",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/gerardogrimaldi/DolarHoyApi/issues"
+  },
+  "homepage": "https://github.com/gerardogrimaldi/DolarHoyApi#readme"
 }
