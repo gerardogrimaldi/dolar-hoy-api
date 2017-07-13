@@ -1,11 +1,13 @@
 var uriString = process.env.MONGOLAB_URI;
 var mongoose = require('mongoose');
 var express = require('express');
-var request = require("request");
+var request = require('request');
 var mail = require('./nodemail');
+
 var valoresSchema = require('./Model/mongoSchema').valoresDolarHoySchema;
 var Valores = mongoose.model('ValoresDolarHoy', valoresSchema);
-console.log(uriString);
+
+console.log('Connection to db... ');
 mongoose.connect(uriString, function (err, res) {
   if (err) {
     console.log ('ERROR connecting to: ' + uriString + '. ' + err);
@@ -15,7 +17,6 @@ mongoose.connect(uriString, function (err, res) {
 });
 
 var app = express();
-app.use(express.logger());
 
 // CORS
 app.all('/*', function (req, res, next) {
