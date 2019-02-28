@@ -45,7 +45,7 @@ app.get('/dolar/:pass', function(req, res) {
       });
 });
 
-app.get('/dolar-graph/:pass', function(req, res) {
+/*app.get('/dolar-graph/:pass', function(req, res) {
   if (req.params.pass !== 'Hola123!') {
     return res.send('Error: Wrong password...');
   }
@@ -75,9 +75,9 @@ app.get('/dolar-blue-graph/:pass', function(req, res) {
       return res.send(eval(body));
     }
   });
-});
+});*/
 
-app.get('/dolar-tarjeta-graph/:pass', function(req, res) {
+/*app.get('/dolar-tarjeta-graph/:pass', function(req, res) {
   if (req.params.pass !== 'Hola123!') {
     return res.send('Error: Wrong password...');
   }
@@ -107,7 +107,8 @@ app.get('/dolar-ahorro-graph/:pass', function(req, res) {
       return res.send(eval(body));
     }
   });
-});
+});*/
+
 app.listen(process.env.PORT || 3000);
 
 function onError(err) {
