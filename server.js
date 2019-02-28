@@ -4,7 +4,7 @@ var express = require('express');
 var request = require('request');
 var mail = require('./nodemail');
 
-var valoresSchema = require('./Model/mongoSchema').valoresDolarHoySchema;
+var valoresSchema = require('./model/mongoSchema').valoresDolarHoySchema;
 var Valores = mongoose.model('ValoresDolarHoy', valoresSchema);
 
 console.log('Connection to db... ');
