@@ -8,7 +8,7 @@ var valoresSchema = require('./model/mongoSchema').valoresDolarHoySchema;
 var Valores = mongoose.model('ValoresDolarHoy', valoresSchema);
 
 console.log('Connection to db... ');
-mongoose.connect(uriString, { useNewUrlParser: true },
+mongoose.connect(uriString, { useNewUrlParser: true, useUnifiedTopology: true },
   function (err, res) {
   if (err) {
     console.log ('ERROR connecting to: ' + uriString + '. ' + err);
