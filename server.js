@@ -33,7 +33,7 @@ app.get('/dolar/:pass', function(req, res) {
     return res.send('Error: Wrong password...');
   }
   Valores.findOne()
-    .select('dolarCompra dolarVenta dolarBlueCompra dolarBlueVenta dolarTarjeta realCompra realVenta euroCompra euroVenta date')
+    .select('dolarOficialCompra dolarOficialVenta dolarLibreCompra dolarLibreVenta dolarMayoristaCompra dolarMayoristaVenta dolarBolsaCompra dolarBolsaVenta dolarLiquiCompra dolarLiquiVenta euroCompra euroVenta realCompra realVenta pesoUruguayoCompra pesoUruguayoVenta pesoChilenoCompra pesoChilenoVenta date')
     .sort('-date')
     .exec(
       function (err, doc) {
@@ -118,4 +118,4 @@ function onError(err) {
   console.log(err);
 }
 
-console.log('Server HTTP Listening on port ' + process.env.PORT + '...');
+console.log('Server HTTP Listening on port ' + process.env.PORT || 3000 + '...');
