@@ -2,7 +2,7 @@
   "name": "dolarhoyserver",
   "version": "1.0.0",
   "dependencies": {
-    "express": "^4.15.3",
+    "express": "^4.18.2",
     "mongoose": "^5.7.5",
     "nodemailer": "4.0.1",
     "request": "^2.67.0"
